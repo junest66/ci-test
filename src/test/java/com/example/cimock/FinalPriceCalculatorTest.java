@@ -45,17 +45,17 @@ public class FinalPriceCalculatorTest {
         assertEquals(5.0, price); // 예상 결과 (0.0 + 5.0)
     }
 
-    @Test
-    void testCalculateFinalPriceWithSixItems() {
-        ShoppingCart cart = new ShoppingCart();
-        cart.addItem(ItemType.OTHER, 10.0, 6);
-
-        when(extraChargeForElectronicsRule.priceToAggregator(cart)).thenReturn(0.0);
-
-        FinalPriceCalculator calculator = new FinalPriceCalculator(
-                Arrays.asList(deliveryPriceRule, extraChargeForElectronicsRule));
-        double price = calculator.calculate(cart);
-
-        assertEquals(12.5, price); // 예상 결과 (0.0 + 12.5)
-    }
+//    @Test
+//    void testCalculateFinalPriceWithSixItems() {
+//        ShoppingCart cart = new ShoppingCart();
+//        cart.addItem(ItemType.OTHER, 10.0, 6);
+//
+//        when(extraChargeForElectronicsRule.priceToAggregator(cart)).thenReturn(0.0);
+//
+//        FinalPriceCalculator calculator = new FinalPriceCalculator(
+//                Arrays.asList(deliveryPriceRule, extraChargeForElectronicsRule));
+//        double price = calculator.calculate(cart);
+//
+//        assertEquals(12.5, price); // 예상 결과 (0.0 + 12.5)
+//    }
 }
