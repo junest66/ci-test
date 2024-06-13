@@ -1,50 +1,32 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id 'org.springframework.boot' version '3.3.0'
-    id 'io.spring.dependency-management' version '1.1.5'
 }
 
 jacoco {
     toolVersion = "0.8.7"
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-tasks.named('test') {
+test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport // 테스트 후에 Jacoco 리포트를 생성하도록 설정
+    finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
-    dependsOn test // 테스트가 완료된 후에 Jacoco 리포트를 생성하도록 설정
     reports {
         xml.required.set(true)
         html.required.set(true)
     }
 }
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.8 // 최소 커버리지 비율 (80%)
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
