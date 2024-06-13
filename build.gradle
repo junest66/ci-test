@@ -42,8 +42,9 @@ tasks.named('test') {
 }
 
 jacocoTestReport {
+    dependsOn test // 테스트가 완료된 후에 Jacoco 리포트를 생성하도록 설정
     reports {
-        xml.required = true
-        html.enabled = true
+        xml.required.set(true)
+        html.required.set(true)
     }
 }
