@@ -22,3 +22,6 @@ jobs:
 
     - name: Run tests
       run: ./gradlew test
+
+    - name: Verify Coverage
+      run: ./gradlew check
