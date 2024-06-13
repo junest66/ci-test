@@ -11,7 +11,7 @@ public class ShoppingCart {
     }
 
     public void addItem(ItemType type, double price, int quantity) {
-        items.add(new Item(type, price, quantity));
+        items.add(new Item(type, quantity));
     }
 
     public int numberOfItems() {
