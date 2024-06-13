@@ -17,14 +17,15 @@ public class FinalPriceCalculatorTest {
     void setUp() {
         cart = new ShoppingCart();
         deliveryPriceRule = new DeliveryPrice();
-        extraChargeForElectronicsRule = mock(PriceRule.class);
+//        extraChargeForElectronicsRule = mock(PriceRule.class);
+        extraChargeForElectronicsRule = new ExtraChargeForElectronics();
     }
 
     @Test
     void testCalculateFinalPriceWithMixedRules() {
         cart.addItem(ItemType.ELECTRONIC, 300.0, 1);
         cart.addItem(ItemType.OTHER, 50.0, 2);
-        when(extraChargeForElectronicsRule.priceToAggregator(cart)).thenReturn(7.5);
+//        when(extraChargeForElectronicsRule.priceToAggregator(cart)).thenReturn(7.5);
 
         FinalPriceCalculator calculator = new FinalPriceCalculator(
                 Arrays.asList(deliveryPriceRule, extraChargeForElectronicsRule));
@@ -36,7 +37,7 @@ public class FinalPriceCalculatorTest {
     @Test
     void testCalculateFinalPriceWithMockReturningZero() {
         cart.addItem(ItemType.OTHER, 50.0, 3);
-        when(extraChargeForElectronicsRule.priceToAggregator(cart)).thenReturn(0.0);
+//        when(extraChargeForElectronicsRule.priceToAggregator(cart)).thenReturn(0.0);
 
         FinalPriceCalculator calculator = new FinalPriceCalculator(
                 Arrays.asList(deliveryPriceRule, extraChargeForElectronicsRule));
@@ -50,7 +51,7 @@ public class FinalPriceCalculatorTest {
         ShoppingCart cart = new ShoppingCart();
         cart.addItem(ItemType.OTHER, 10.0, 6);
 
-        when(extraChargeForElectronicsRule.priceToAggregator(cart)).thenReturn(0.0);
+//        when(extraChargeForElectronicsRule.priceToAggregator(cart)).thenReturn(0.0);
 
         FinalPriceCalculator calculator = new FinalPriceCalculator(
                 Arrays.asList(deliveryPriceRule, extraChargeForElectronicsRule));
